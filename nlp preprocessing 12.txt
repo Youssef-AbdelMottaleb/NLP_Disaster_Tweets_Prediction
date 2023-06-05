@@ -1,0 +1,90 @@
+import re
+import string
+from nltk.corpus import stopwords
+from nltk.tokenize import word_tokenize
+from nltk.stem import PorterStemmer
+from nltk.stem import WordNetLemmatizer
+
+class TextPreprocessor:
+    def __init__(self):
+        self.stop_words = set(stopwords.words('english'))
+        self.stemmer = PorterStemmer()
+        self.lemmatizer = WordNetLemmatizer()
+
+    def clean_text(self, text):
+        """
+        Cleans the input text by removing unnecessary characters and converting the text to lowercase.
+        """
+        text = text.lower()
+        text = re.sub(r'\d+', '', text)  # remove digits
+        text = text.translate(str.maketrans('', '', string.punctuation))  # remove punctuation
+        return text.strip()
+
+    def tokenize_text(self, text):
+        """
+        Tokenizes the input text by splitting it into words.
+        """
+        return word_tokenize(text)
+
+    def remove_stopwords(self, tokens):
+        """
+        Removes stop words from the list of input tokens.
+        """
+        return [token for token in tokens if token not in self.stop_words]
+
+    def stem_tokens(self, tokens):
+        """
+        Stems the list of input tokens.
+        """
+        return [self.stemmer.stem(token) for token in tokens]
+
+    def lemmatize_tokens(self, tokens):
+        """
+        Lemmatizes the list of input tokens.
+        """
+        return [self.lemmatizer.lemmatize(token) for token in tokens]
+
+
+
+
+
+text preprocessing techniques we will inshallah make :
+
+change case
+Removing HTML tags
+Expand Contractions
+Removing URLs
+Removing Email IDs
+handling Mentions
+Handling Emojis and emoticons
+Handling special characters
+Handling Digits or Words with Digits
+Handling Accented Words
+Handling Markup and formatting texts
+handling Redundant words and phrases
+handling Proper nouns
+handling Slang and colloquialisms
+handling Emphasis markers
+handling Idioms and figurative language
+Removing Unicode Characters
+handling money values
+handling Abbreviation/Acronym Disambiguation
+Removing Stopwords
+Removing Extra Spaces
+Stemming or Lemmatization
+Spelling Correction
+Correcting Compound Words
+
+Feature extraction techniques we can use:
+
+Binary Encoding
+Bag-of-Words (BoW)
+Word Embeddings
+Word2Vec ( sent2vec )
+GloVe
+FastText
+Term Frequency-Inverse Document Frequency (TF-IDF)
+Named Entity Recognition (NER) ( Optional )
+POS Tagging ( Optional )
+
+note that you must be familier with regex to handle most of text preprocessing techniques and we will explore alot of feature extraction techniques from the above to be able to overcome overfitting problem and achieve high test results.
